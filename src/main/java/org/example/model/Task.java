@@ -64,4 +64,15 @@ public class Task {
     public static enum Priority{
         LOW, MIDDLE, HARD
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+               "id=" + id +
+               ", title='" + title + '\'' +
+               ", description='" + description + '\'' +
+               ", priority=" + priority +
+               ", date=" + date +
+               '}';
+    }
 }
