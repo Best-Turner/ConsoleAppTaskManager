@@ -8,9 +8,4 @@ public interface Repository<T, E> {
 
     List<T> getAll();
 
-    T getById(E e);
-
-    T update(E e, T updated);
-
-    boolean deleteById(E e);
 }
