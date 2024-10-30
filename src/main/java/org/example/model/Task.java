@@ -61,10 +61,6 @@ public class Task {
         this.date = date;
     }
 
-    public static enum Priority{
-        LOW, MIDDLE, HARD
-    }
-
     @Override
     public String toString() {
         return "Task{" +
@@ -74,5 +70,9 @@ public class Task {
                ", priority=" + priority +
                ", date=" + date +
                '}';
+    }
+
+    public static enum Priority {
+        LOW, MIDDLE, HARD
     }
 }

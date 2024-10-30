@@ -26,7 +26,13 @@ public class TaskRepositoryImpl implements TaskRepository {
         return parser.parseFrom();
     }
 
+    @Override
     public void clean() {
         parser.clear();
+    }
+
+    @Override
+    public void saveTaskList(List<Task> taskList) {
+        parser.parseTo(taskList);
     }
 }
