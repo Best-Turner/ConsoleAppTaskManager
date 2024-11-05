@@ -64,6 +64,9 @@ public class TaskServiceImpl implements Service<Task> {
     }
 
     private long determineId() {
+        if (getAll().isEmpty()) {
+            return 0;
+        }
         return getAll().getLast().getId();
     }
 }

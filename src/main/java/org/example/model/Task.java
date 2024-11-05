@@ -21,6 +21,13 @@ public class Task {
         this.date = date;
     }
 
+    public Task(String title, String description, Priority priority, LocalDateTime date) {
+        this.title = title;
+        this.description = description;
+        this.priority = priority;
+        this.date = date;
+    }
+
     public long getId() {
         return id;
     }
@@ -63,13 +70,10 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-               "id=" + id +
-               ", title='" + title + '\'' +
-               ", description='" + description + '\'' +
-               ", priority=" + priority +
-               ", date=" + date +
-               '}';
+        return id +" - " +"Заголовок - " + title
+               + "\t\tОписание - " + description
+               + "\t\tПриоритет - " + priority
+               + "\t\tДата создания - " + date;
     }
 
     public static enum Priority {
