@@ -1,5 +1,7 @@
 package org.example.service;
 
+import org.example.exception.TaskNotFoundException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +13,7 @@ public interface Service<T> {
 
     List<T> getAll();
 
-    boolean deleteById(long id);
+    boolean deleteById(long id) throws TaskNotFoundException;
 
-    T update(long id, T updated);
+    T update(long id, T updated) throws TaskNotFoundException;
 }

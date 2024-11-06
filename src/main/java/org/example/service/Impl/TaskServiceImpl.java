@@ -1,9 +1,11 @@
 package org.example.service.Impl;
 
+import org.example.exception.TaskNotFoundException;
 import org.example.model.Task;
 import org.example.repository.TaskRepository;
 import org.example.service.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,7 @@ public class TaskServiceImpl implements Service<Task> {
     @Override
     public void add(Task task) {
         task.setId(determineId() + 1);
+        task.setDate(LocalDateTime.now());
         repository.save(task);
     }
 
@@ -33,9 +36,10 @@ public class TaskServiceImpl implements Service<Task> {
     }
 
     @Override
-    public boolean deleteById(long id) {
+    public boolean deleteById(long id) throws TaskNotFoundException {
         List<Task> tasks = getAll();
-        boolean contains = tasks.removeIf(task -> task.getId() == id);
+        Task task = existTaskById(tasks, id);
+        boolean contains = tasks.remove(task);
         if (contains) {
             repository.clean();
             repository.saveTaskList(tasks);
@@ -45,22 +49,24 @@ public class TaskServiceImpl implements Service<Task> {
     }
 
     @Override
-    public Task update(long id, Task updated) {
+    public Task update(long id, Task updated) throws TaskNotFoundException {
         List<Task> tasks = getAll();
-        Optional<Task> task = tasks.stream()
-                .filter(t -> t.getId() == id).findAny();
-        if (task.isPresent()) {
-            repository.clean();
-            Task toUpdate = task.get();
-            repository.clean();
-            toUpdate.setTitle(updated.getTitle());
-            toUpdate.setDescription(updated.getDescription());
-            toUpdate.setPriority(updated.getPriority());
-            toUpdate.setDate(updated.getDate());
-            repository.saveTaskList(tasks);
-            return toUpdate;
+        Task toUpdate = existTaskById(tasks, id);
+        repository.clean();
+        String newTitle = updated.getTitle();
+        if (!newTitle.isEmpty()) {
+            toUpdate.setTitle(newTitle);
         }
-        return null;
+        String newDescription = updated.getDescription();
+        if (!newDescription.isEmpty()) {
+            toUpdate.setDescription(newDescription);
+        }
+        if (updated.getPriority() != null) {
+            toUpdate.setPriority(updated.getPriority());
+        }
+        toUpdate.setDate(updated.getDate());
+        repository.saveTaskList(tasks);
+        return toUpdate;
     }
 
     private long determineId() {
@@ -68,5 +74,14 @@ public class TaskServiceImpl implements Service<Task> {
             return 0;
         }
         return getAll().getLast().getId();
+    }
+
+    private Task existTaskById(List<Task> tasks, long id) throws TaskNotFoundException {
+        Optional<Task> task = tasks.stream()
+                .filter(t -> t.getId() == id).findAny();
+        if (!task.isPresent()) {
+            throw new TaskNotFoundException("Задача с ID = " + id + " не найдена");
+        }
+        return task.get();
     }
 }

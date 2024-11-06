@@ -16,9 +16,8 @@ public class SaveTaskCommand extends Command {
     public void execute() {
         String title = readInput("Введите заголовок задачи");
         String description = readInput("Введите описание  задачи");
-        String date = readInput("Введите дату задачи");
 
-        service.add(new Task(title, description, Task.Priority.LOW, LocalDateTime.parse(date)));
+        service.add(new Task(title, description, Task.Priority.LOW, LocalDateTime.now()));
 
         System.out.println("Задача сохранена!");
     }

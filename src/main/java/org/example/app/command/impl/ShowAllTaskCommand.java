@@ -10,9 +10,6 @@ public class ShowAllTaskCommand extends Command {
 
     @Override
     public void execute() {
-        long before = System.currentTimeMillis();
         service.getAll().forEach(System.out::println);
-        long after = System.currentTimeMillis();
-        System.out.println("Время загрузки данных  = " + (after - before));
     }
 }

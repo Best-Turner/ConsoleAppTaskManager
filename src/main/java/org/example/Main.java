@@ -13,9 +13,11 @@ import org.example.util.Impl.CSVParserUtil;
 import org.example.util.Parser;
 
 public class Main {
+    private static final String PATH = "file1.csv";
+
     public static void main(String[] args) {
 
-        Parser parser = new CSVParserUtil("file1.csv");
+        Parser parser = new CSVParserUtil(PATH);
 
         TaskRepository repository = new TaskRepositoryImpl(parser);
         TaskServiceImpl service = new TaskServiceImpl(repository);
