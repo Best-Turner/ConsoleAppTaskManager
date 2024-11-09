@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class AppLauncher {
 
-
     private final IMenu menu;
     private IMenu currentMenu;
     private Scanner scanner;

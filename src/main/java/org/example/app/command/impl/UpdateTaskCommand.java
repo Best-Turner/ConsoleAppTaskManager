@@ -6,6 +6,7 @@ import org.example.exception.InputFormatException;
 import org.example.exception.TaskNotFoundException;
 import org.example.model.Task;
 import org.example.service.Service;
+import org.example.util.InputReader;
 import org.example.util.OptionalUtility;
 
 import java.time.LocalDateTime;
@@ -13,8 +14,8 @@ import java.time.LocalDateTime;
 public class UpdateTaskCommand extends Command {
 
 
-    public UpdateTaskCommand(Service service) {
-        super(service);
+    public UpdateTaskCommand(Service service, InputReader inputReader) {
+        super(service, inputReader);
     }
 
     @Override

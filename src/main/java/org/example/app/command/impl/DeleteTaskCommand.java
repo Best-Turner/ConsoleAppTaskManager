@@ -5,12 +5,14 @@ import org.example.exception.ErrorMessage;
 import org.example.exception.InputFormatException;
 import org.example.exception.TaskNotFoundException;
 import org.example.service.Service;
+import org.example.util.InputReader;
 import org.example.util.OptionalUtility;
 
 public class DeleteTaskCommand extends Command {
 
-    public DeleteTaskCommand(Service service) {
-        super(service);
+
+    public DeleteTaskCommand(Service service, InputReader inputReader) {
+        super(service, inputReader);
     }
 
     @Override

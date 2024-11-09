@@ -1,23 +1,23 @@
 package org.example.app.command;
 
 import org.example.service.Service;
+import org.example.util.InputReader;
 
 import java.util.Scanner;
 
 public abstract class Command {
 
-    protected final Scanner scanner;
+    protected final InputReader reader;
     protected final Service service;
 
-    public Command(Service service) {
-        this.scanner = new Scanner(System.in);
+    public Command(Service service, InputReader inputReader) {
+        this.reader = inputReader;
         this.service = service;
     }
 
     public abstract void execute();
 
     public String readInput(String text) {
-        System.out.println(text);
-        return scanner.nextLine();
+        return reader.readInput(text);
     }
 }
