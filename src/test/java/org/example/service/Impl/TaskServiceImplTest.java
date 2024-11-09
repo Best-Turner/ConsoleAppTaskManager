@@ -16,8 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class TaskServiceImplTest {
 
@@ -28,13 +27,14 @@ class TaskServiceImplTest {
     TaskServiceImpl service;
 
     private Task task;
+    private long id = 1l;
     private List<Task> tasks;
 
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        task = new Task(1, "title", "description", Task.Priority.LOW, LocalDateTime.now());
+        task = new Task(id, "title", "description", Task.Priority.LOW, LocalDateTime.now());
         tasks = new ArrayList<>();
     }
 
@@ -66,9 +66,9 @@ class TaskServiceImplTest {
 
         assertEquals("New Title", result.getTitle());
         assertEquals("New Description", result.getDescription());
-        assertEquals(existingTask, result); // Проверяем, что возвращается правильный объект
-        verify(repository).clean(); // Проверяем, что метод clean() был вызван
-        verify(repository).saveTaskList(tasks); // Проверяем, что сохранение списка задач было вызвано
+        assertEquals(existingTask, result);
+        verify(repository).clean();
+        verify(repository).saveTaskList(tasks);
     }
 
     @Test
@@ -79,5 +79,27 @@ class TaskServiceImplTest {
 
         assertThrows(TaskNotFoundException.class, () -> service.update(999L, updatedTask));
     }
+
+    @Test
+    void whenDeleteNonExistentTaskThenThrowTaskNotFoundException() throws TaskNotFoundException {
+        when(repository.getAll()).thenReturn(Collections.emptyList());
+        assertThrows(TaskNotFoundException.class, () -> service.deleteById(999), "Задача с ID = " + 999 + " не найдена");
+    }
+
+    @Test
+    void whenDeleteExistentTaskThenReturnTrue() throws TaskNotFoundException {
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(task);
+        when(repository.getAll()).thenReturn(tasks);
+        assertTrue(service.deleteById(id));
+    }
+
+    @Test
+    void whenAddTaskThenTaskMustBeSave() {
+        service.add(task);
+        verify(repository, times(1)).save(task);
+    }
+
+
 }
 

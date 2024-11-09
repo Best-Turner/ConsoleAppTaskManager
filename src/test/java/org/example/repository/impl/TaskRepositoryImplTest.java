@@ -22,7 +22,6 @@ class TaskRepositoryImplTest {
     @InjectMocks
     TaskRepositoryImpl repository;
 
-
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
