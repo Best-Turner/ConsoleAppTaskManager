@@ -10,21 +10,27 @@ import org.example.repository.TaskRepository;
 import org.example.repository.impl.TaskRepositoryImpl;
 import org.example.service.Impl.TaskServiceImpl;
 import org.example.util.Impl.CSVParserUtil;
+import org.example.util.InputReader;
 import org.example.util.Parser;
 
+import java.util.Scanner;
+
 public class Main {
+    private static final String PATH = "file1.csv";
+
     public static void main(String[] args) {
 
-        Parser parser = new CSVParserUtil("file1.csv");
+        Parser parser = new CSVParserUtil(PATH);
 
         TaskRepository repository = new TaskRepositoryImpl(parser);
         TaskServiceImpl service = new TaskServiceImpl(repository);
+        InputReader inputReader = new InputReader(new Scanner(System.in));
 
-        Command saveCommand = new SaveTaskCommand(service);
-        Command showAll = new ShowAllTaskCommand(service);
-        Command deleteById = new DeleteTaskCommand(service);
-        Command updateTask = new UpdateTaskCommand(service);
-        Command exitCommand = new ExitCommand(service);
+        Command saveCommand = new SaveTaskCommand(service, inputReader);
+        Command showAll = new ShowAllTaskCommand(service, inputReader);
+        Command deleteById = new DeleteTaskCommand(service, inputReader);
+        Command updateTask = new UpdateTaskCommand(service, inputReader);
+        Command exitCommand = new ExitCommand(service, inputReader);
 
 
         IMenu mainMenu = new Submenu("Главное меню");
@@ -46,25 +52,5 @@ public class Main {
 
         app.start();
 
-        // для тестов
-//
-//        int coint = 1;
-//        try (CSVPrinter printer = new CSVPrinter(new FileWriter("file1.csv"), CSVFormat.MYSQL)) {
-
-//
-//            printer.printRecord(coint++, "Task1", "SomeDescription-1", "LOW", LocalDateTime.now());
-//            printer.printRecord(coint++, "Task2", "SomeDescription-2", "HARD", LocalDateTime.now());
-//            printer.printRecord(coint++, "Task3", "SomeDescription-3", "MIDDLE", LocalDateTime.now());
-//            printer.printRecord(coint, "Task4", "SomeDescription-4", "HARD", LocalDateTime.now());
-
-//            for (int i = 0; i < 1000; i++) {
-//                printer.printRecord(coint++, "Task - " + i,
-//                        "SomeDescription - " + i,
-//                        i % 2 == 0 ? "LOW" : "HARD",
-//                        LocalDateTime.now());
-//            }
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 }

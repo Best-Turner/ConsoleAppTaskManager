@@ -19,7 +19,10 @@ public class Submenu extends IMenu {
 
     @Override
     public IMenu getChild(int index) {
-        return menuList.get(index);
+        if (index < 0 || index > menuList.size()) {
+            throw new IndexOutOfBoundsException("Команда под номером " + index + " не поддерживается");
+        }
+        return menuList.get(index - 1);
     }
 
     @Override

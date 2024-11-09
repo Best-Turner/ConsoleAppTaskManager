@@ -1,5 +1,7 @@
 package org.example.app.menu;
 
+import org.example.exception.InputFormatException;
+
 public abstract class IMenu {
 
     private static final String ERROR_MESSAGE = "Операция не поддерживается";
@@ -14,7 +16,7 @@ public abstract class IMenu {
         throw new UnsupportedOperationException(ERROR_MESSAGE);
     }
 
-    public IMenu getChild(int index) {
+    public IMenu getChild(int index) throws InputFormatException {
         throw new UnsupportedOperationException(ERROR_MESSAGE);
     }
 
@@ -25,6 +27,6 @@ public abstract class IMenu {
 
     @Override
     public String toString() {
-        return title ;
+        return title;
     }
 }

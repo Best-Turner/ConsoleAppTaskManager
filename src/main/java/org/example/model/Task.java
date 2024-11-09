@@ -70,7 +70,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return id +" - " +"Заголовок - " + title
+        return id + " - " + "Заголовок - " + title
                + "\t\tОписание - " + description
                + "\t\tПриоритет - " + priority
                + "\t\tДата создания - " + date;
