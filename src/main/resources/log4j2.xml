@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="System.out">
+            <PatternLayout pattern="%red{%d{DATE}} %blue{[%t]} %M %yellow{%p - %msg%n}"/>
+        </Console>
+        <File name="InfoFile" fileName="logs/log.txt" immediateFlush="true" append="false">
+            <PatternLayout pattern="%d{DATE} [%t] метод - %M() %p - %msg%n"/>
+        </File>
+        <File name="DebugFile" fileName="logs/debug.log" immediateFlush="true" append="false">
+            <PatternLayout pattern="%d{DATE} [%t] метод - %M() %p - %msg%n"/>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="Console" level="INFO"/>
+            <AppenderRef ref="InfoFile" level="INFO"/>
+            <AppenderRef ref="DebugFile" level="DEBUG"/>
+        </Root>
+    </Loggers>
+</Configuration>
