@@ -1,5 +1,7 @@
 package org.example.app;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.app.menu.IMenu;
 import org.example.app.menu.impl.MenuItem;
 import org.example.exception.ErrorMessage;
@@ -11,6 +13,7 @@ import java.util.Scanner;
 public class AppLauncher {
 
     private final IMenu menu;
+    private final Logger logger = LogManager.getLogger(AppLauncher.class);
     private IMenu currentMenu;
     private Scanner scanner;
 
@@ -20,8 +23,9 @@ public class AppLauncher {
     }
 
     public void start() {
-        System.out.println("Добро пожаловать в программу по управлению задачами");
 
+        System.out.println("Добро пожаловать в программу по управлению задачами");
+        logger.info("Старт работы программы");
         while (true) {
             try {
                 currentMenu = menu;

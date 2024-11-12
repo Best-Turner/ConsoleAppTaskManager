@@ -3,8 +3,6 @@ package org.example.app.command;
 import org.example.service.Service;
 import org.example.util.InputReader;
 
-import java.util.Scanner;
-
 public abstract class Command {
 
     protected final InputReader reader;

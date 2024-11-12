@@ -16,7 +16,7 @@ import org.example.util.Parser;
 import java.util.Scanner;
 
 public class Main {
-    private static final String PATH = "file1.csv";
+    private static final String PATH = "testFile.csv";
 
     public static void main(String[] args) {
 

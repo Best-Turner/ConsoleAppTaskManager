@@ -1,23 +1,14 @@
 package org.example.app.command.impl;
 
-import org.example.exception.InputFormatException;
 import org.example.exception.TaskNotFoundException;
-import org.example.service.Impl.TaskServiceImpl;
-import org.example.util.InputReader;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
-class DeleteTaskCommandTest extends CommandTestBase{
+class DeleteTaskCommandTest extends CommandTestBase {
 
     @InjectMocks
     private DeleteTaskCommand command;
