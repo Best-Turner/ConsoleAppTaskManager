@@ -5,10 +5,10 @@ import org.mockito.InjectMocks;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-class TaskByIdCommandTest extends CommandTestBase{
+class TaskByIdCommandTest extends CommandTestBase {
 
     @InjectMocks
     private TaskByIdCommand command;

@@ -13,14 +13,13 @@ import java.time.LocalDateTime;
 
 public class CommandTestBase {
 
+    protected final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    protected final LocalDateTime dateTime = LocalDateTime.now();
     @Mock
     protected TaskServiceImpl service;
     @Mock
     protected InputReader reader;
-    protected final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
     protected Task task;
-    protected final LocalDateTime dateTime = LocalDateTime.now();
 
     @BeforeEach
     void setUp() {

@@ -5,14 +5,10 @@ import org.example.model.Task;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 class UpdateTaskCommandTest extends CommandTestBase {
-
-
 
 
     @InjectMocks
