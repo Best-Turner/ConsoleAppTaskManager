@@ -7,13 +7,13 @@
         <File name="InfoFile" fileName="logs/log.txt" immediateFlush="true" append="false">
             <PatternLayout pattern="%d{DATE} [%t] метод - %M() %p - %msg%n"/>
         </File>
-        <File name="DebugFile" fileName="logs/debug.log" immediateFlush="true" append="false">
+        <File name="DebugFile" fileName="logs/debug.txt" immediateFlush="true" append="false">
             <PatternLayout pattern="%d{DATE} [%t] метод - %M() %p - %msg%n"/>
         </File>
     </Appenders>
     <Loggers>
         <Root level="DEBUG">
-            <AppenderRef ref="Console" level="INFO"/>
+<!--            <AppenderRef ref="Console" level="INFO"/>-->
             <AppenderRef ref="InfoFile" level="INFO"/>
             <AppenderRef ref="DebugFile" level="DEBUG"/>
         </Root>
